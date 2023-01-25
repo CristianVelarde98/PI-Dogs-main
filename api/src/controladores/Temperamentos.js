@@ -6,9 +6,14 @@ const IntroducirTemperamentos = async (temps) => {
   });
 
   const resp = await Temperamento.bulkCreate(temperamentData);
-  return resp;
+};
+
+const consultarTemps = async () => {
+  const respuesta = await Temperamento.findAll();
+  return respuesta;
 };
 
 module.exports = {
   IntroducirTemperamentos,
+  consultarTemps,
 };

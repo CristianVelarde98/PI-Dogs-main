@@ -1,13 +1,20 @@
 const { Router } = require("express");
-const { CrearPerro } = require("../controladores/Perros.js");
+const {
+  CrearPerro,
+  findDog,
+  traerPorNombre,
+  traerTodos,
+} = require("../controladores/Perros.js");
 
 const router = Router();
 
 router.get("/", async (req, res) => {
   const { name } = req.query;
   try {
-    if (!name) res.status(200).send("no mandaste ningun name por query");
-    else res.status(200).send(`mandaste el siguiente name por query: ${name}`);
+    let resp;
+    if (!name) resp = "sin nombre";
+    else resp = `con nombre = ${name}`;
+    res.status(200).send(resp);
   } catch (error) {
     res.status(400).send("tenemos un problema pa");
   }
@@ -15,14 +22,24 @@ router.get("/", async (req, res) => {
 
 router.get("/:idRaza", async (req, res) => {
   const { idRaza } = req.params;
-  console.log(idRaza);
-  res.status(200).send("llegamo al segundo endpint: " + idRaza);
+  try {
+    const perro = await findDog(idRaza);
+    res.status(200).json(perro);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 
 router.post("/", async (req, res) => {
-  const { nombre, altura, peso, años } = req.body;
+  const { nombre, altura, peso, años, temperamentos } = req.body;
   try {
-    const respuesta = await CrearPerro(nombre, altura, peso, años);
+    const respuesta = await CrearPerro(
+      nombre,
+      altura,
+      peso,
+      años,
+      temperamentos
+    );
     res.status(200).json(respuesta);
   } catch (error) {
     res.status(400).json({ error: error.message });
