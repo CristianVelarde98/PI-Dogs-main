@@ -1,5 +1,4 @@
 const axios = require("axios");
-const { Temperaments } = require("../models/Temperamento.js");
 const { API_KEY } = process.env;
 const { Router } = require("express");
 const {
