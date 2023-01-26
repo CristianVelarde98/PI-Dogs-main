@@ -7,13 +7,25 @@ const { armonizarDatosExt, armonizarDatosInt } = require("./filtros.js");
 const API = `https://api.thedogapi.com/v1/breeds?${API_KEY}`;
 
 let id = 1;
-const CrearPerro = async (nombre, altura, peso, años, temperamentos) => {
+const CrearPerro = async (
+  nombre,
+  alturaMax,
+  alturaMin,
+  pesoMax,
+  pesoMin,
+  años,
+  imagen,
+  temperamentos
+) => {
   const result = await Dog.create({
     ID: "L" + id,
     Nombre: nombre,
-    Altura: altura,
-    Peso: peso,
-    Años_de_vida: años,
+    TiempoDeVida: años,
+    Imagen: imagen,
+    AlturaMaxima: alturaMax,
+    AlturaMinima: alturaMin,
+    PesoMaximo: pesoMax,
+    PesoMinimo: pesoMin,
   });
 
   temperamentos.map(async (temp) => {
@@ -79,7 +91,7 @@ const traerTodos = async () => {
     ],
   });
   const respExt = await axios.get(API);
-  const intArmonizados = armonizarDatosInt(respInt.dataValues);
+  const intArmonizados = armonizarDatosInt(respInt);
   const extArmonizados = armonizarDatosExt(respExt.data);
   return [...intArmonizados, ...extArmonizados];
 };

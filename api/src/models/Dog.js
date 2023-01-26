@@ -15,16 +15,28 @@ module.exports = (sequelize) => {
         allowNull: false,
         unique: true,
       },
-      Altura: {
+      AlturaMaxima: {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
-      Peso: {
+      AlturaMinima: {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
-      Años_de_vida: {
+      PesoMaximo: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+      },
+      PesoMinimo: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+      },
+      TiempoDeVida: {
         type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      Imagen: {
+        type: DataTypes.STRING,
       },
     },
     { timestamps: false }

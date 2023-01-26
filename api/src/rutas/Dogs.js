@@ -31,13 +31,25 @@ router.get("/:idRaza", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { nombre, altura, peso, años, temperamentos } = req.body;
+  const {
+    nombre,
+    alturaMax,
+    alturaMin,
+    pesoMax,
+    pesoMin,
+    años,
+    imagen,
+    temperamentos,
+  } = req.body;
   try {
     const respuesta = await CrearPerro(
       nombre,
-      altura,
-      peso,
+      alturaMax,
+      alturaMin,
+      pesoMax,
+      pesoMin,
       años,
+      imagen,
       temperamentos
     );
     res.status(200).json(respuesta);

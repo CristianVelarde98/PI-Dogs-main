@@ -1,9 +1,11 @@
 import "./App.css";
+import "./Componentes/Loading";
+import Loading from "./Componentes/Loading";
 
 function App() {
   return (
     <div className="App">
-      <span className="loader">CARGANDO...</span>
+      <Loading />
     </div>
   );
 }
