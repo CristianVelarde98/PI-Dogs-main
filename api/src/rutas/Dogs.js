@@ -12,11 +12,11 @@ router.get("/", async (req, res) => {
   const { name } = req.query;
   try {
     let resp;
-    if (!name) resp = "sin nombre";
-    else resp = `con nombre = ${name}`;
-    res.status(200).send(resp);
+    if (!name) resp = await traerTodos();
+    else resp = await traerPorNombre(name);
+    res.status(200).json(resp);
   } catch (error) {
-    res.status(400).send("tenemos un problema pa");
+    res.status(400).json({ error: error.message });
   }
 });
 

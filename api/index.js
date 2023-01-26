@@ -9,7 +9,7 @@ const {
 const API = `https://api.thedogapi.com/v1/breeds?${API_KEY}`;
 
 const preloadTemperaments = async () => {
-  const respuesta = await axios(API); //.data trae todo el contenido de la API de perros
+  const respuesta = await axios.get(API); //.data trae todo el contenido de la API de perros
   const temperamentos = respuesta.data.map(
     (obj) => obj.temperament && obj.temperament
   );
