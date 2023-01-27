@@ -1,61 +1,55 @@
-const armonizarDatosExt = (datos) => {};
+const armonizarDatosExt = (datos) => {
+  const armonizados = [];
+  for (const dog of datos) {
+    const objPerro = {};
+    objPerro["ID"] = dog.id;
+    objPerro["Nombre"] = dog.name;
+    objPerro["TiempoDeVida"] = dog.life_span.slice(0, 2).trim();
+    objPerro["Imagen"] = dog.image.url;
+    const altura = dog.height.metric;
+    if (altura.length > 2) {
+      const aux = altura.split(" - ");
+      objPerro["AlturaMinima"] = aux[0];
+      objPerro["AlturaMaxima"] = aux[1];
+    } else if (altura.length == 2) objPerro["AlturaMaxima"] = altura;
+    const peso = dog.weight.metric;
+    if (peso.length > 2) {
+      const aux = peso.split(" - ");
+      objPerro["PesoMinimo"] = aux[0];
+      objPerro["PesoMaximo"] = aux[1];
+    } else if (peso.length == 2) objPerro["PesoMaximo"] = peso;
+    const temps = dog.temperament;
+    if (temps) {
+      const aux = temps.split(", ");
+      objPerro["temperamentos"] = aux;
+    } else objPerro["temperamentos"] = [];
+    armonizados.push(objPerro);
+  }
+  return armonizados;
+};
 
 const armonizarDatosInt = (datos) => {
+  const armonizados = [];
   for (const dato of datos) {
-    if (dato) console.log(dato.dataValues);
+    const objPerro = {}; // esta creando el dato armonizado
+    const dog = dato.dataValues;
+    const temps = dog["Temperamentos"];
+    const temperamentos = [];
+    for (const key in dog) {
+      if (key != "Temperamentos") {
+        objPerro[key] = dog[key]; // copio las propiedades del perrito
+      }
+    }
+    for (const temp of temps) {
+      temperamentos.push(temp.dataValues["Nombre"]);
+    }
+    objPerro["temperamentos"] = temperamentos;
+    armonizados.push(objPerro); // por cada vuelta empujo el dato armonizado al array
   }
-  // const temps = datos[0].dataValues.Temperamentos; // aca tengo un array con boj para interar y sacar los datavalues
-  // console.log(temps[0].dataValues);
+  return armonizados;
 };
 
 module.exports = {
   armonizarDatosExt,
   armonizarDatosInt,
 };
-
-// {
-//   weight: { imperial: '50 - 70', metric: '23 - 32' },
-//   height: { imperial: '27 - 30', metric: '69 - 76' },
-//   id: 127,
-//   name: 'Greyhound',
-//   bred_for: 'Coursing hares',
-//   breed_group: 'Hound',
-//   life_span: '10 - 13 years',
-//   temperament: 'Affectionate, Athletic, Gentle, Intelligent, Quiet, Even Tempered',
-//   reference_image_id: 'ryNYMx94X',
-//   image: {
-//     id: 'ryNYMx94X',
-//     width: 1024,
-//     height: 681,
-//     url: 'https://cdn2.thedogapi.com/images/ryNYMx94X.jpg'
-//   }
-// }
-
-// {
-//   ID: 'L1',
-//   Nombre: 'duvan',
-//   AlturaMaxima: 43.3,
-//   AlturaMinima: 16.3,
-//   PesoMaximo: 30.8,
-//   PesoMinimo: 27.6,
-//   TiempoDeVida: 7,
-//   Imagen: null,
-//   Temperamentos: [
-//     Temperamento {
-//       dataValues: [Object],
-//       _previousDataValues: [Object],
-//       uniqno: 1,
-//       _changed: Set(0) {},
-//       _options: [Object],
-//       isNewRecord: false
-//     },
-//     Temperamento {
-//       dataValues: [Object],
-//       _previousDataValues: [Object],
-//       uniqno: 1,
-//       _changed: Set(0) {},
-//       _options: [Object],
-//       isNewRecord: false
-//     }
-//   ]
-// }
