@@ -4,8 +4,10 @@ const armonizarDatosExt = (datos) => {
     const objPerro = {};
     objPerro["ID"] = dog.id;
     objPerro["Nombre"] = dog.name;
-    objPerro["TiempoDeVida"] = dog.life_span.slice(0, 2).trim();
-    objPerro["Imagen"] = dog.image.url;
+    // objPerro["TiempoDeVida"] = dog.life_span.slice(0, 2).trim();
+    dog.image?.url
+      ? (objPerro["Imagen"] = dog.image.url)
+      : (objPerro["Imagen"] = dog.reference_image_id);
     const altura = dog.height.metric;
     if (altura.length > 2) {
       const aux = altura.split(" - ");

@@ -41,7 +41,7 @@ const CrearPerro = async (
 };
 
 const findDog = async (id) => {
-  const respuesta = await Dog.findOne({
+  const respInt = await Dog.findOne({
     where: { ID: id },
     include: [
       {
@@ -53,7 +53,19 @@ const findDog = async (id) => {
       },
     ],
   });
-  return respuesta;
+  if (respInt == null) {
+    const respExt = await axios.get(
+      `https://api.thedogapi.com/v1/breeds/${id}`
+    );
+    if (respExt.data.id == undefined) throw Error("Perro no encontrado");
+    else {
+      const armonado = armonizarDatosExt([respExt.data]);
+      return armonado;
+    }
+  } else {
+    const armonado = armonizarDatosInt([respInt]);
+    return armonado;
+  }
 };
 
 const traerPorNombre = async (name) => {
@@ -73,9 +85,16 @@ const traerPorNombre = async (name) => {
     const respExt = await axios.get(
       `https://api.thedogapi.com/v1/breeds/search?q=${name}`
     );
-    if (!!respExt.data.length) return respExt.data;
-    else throw new Error("Perro no encontrado");
-  } else return respInt;
+    if (!respExt.data.length) throw new Error("Perro no encontrado");
+    else if (respExt.data.length > 1) throw new Error("Nombre inexacto");
+    else {
+      const aux = respExt.data[0].id;
+      return await findDog(`${aux}`);
+    }
+  } else {
+    const armonado = armonizarDatosInt([respInt]);
+    return armonado;
+  }
 };
 
 const traerTodos = async () => {
