@@ -1,0 +1,27 @@
+.contenedor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.contenedor img {
+  height: 400px;
+  width: 800px;
+  margin-left: -150px;
+  border-radius: 50px;
+}
+
+.parrafo {
+  position: absolute;
+  top: 15%;
+  left: 48%;
+  width: 325px;
+}
+
+.contenedorBtn {
+  position: absolute;
+  top: 60%;
+  left: 55%;
+  width: 194px;
+}

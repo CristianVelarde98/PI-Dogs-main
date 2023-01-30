@@ -14,8 +14,8 @@
   animation: loader 2s linear infinite;
   content: "";
   border: 10px solid black;
-  width: 300px;
-  height: 300px;
+  width: 500px;
+  height: 500px;
   position: absolute;
   border-radius: 50%;
 }
@@ -30,6 +30,6 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 45%;
-  left: 45%;
+  top: 50%;
+  left: 50%;
 }

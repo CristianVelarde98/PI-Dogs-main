@@ -1,0 +1,7 @@
+.contenedor {
+  display: flex;
+  column-gap: 60px;
+  row-gap: 100px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
