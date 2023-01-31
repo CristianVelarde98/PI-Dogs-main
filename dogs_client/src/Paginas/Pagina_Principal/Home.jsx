@@ -8,7 +8,7 @@ export default function Home() {
     <div className={styled.contenedor}>
       <NavBar />
       <SearchBar />
-      <Cartas />
+      <Cartas elementos={8} />
     </div>
   );
 }

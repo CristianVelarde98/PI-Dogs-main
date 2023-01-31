@@ -9,6 +9,7 @@ import Landing from "./Paginas/Pagina_Inicial/Landing.jsx";
 import Home from "./Paginas/Pagina_Principal/Home.jsx";
 import Detalle from "./Paginas/Pagina_Detalle/Detalle.jsx";
 import Nuevo from "./Paginas/Crear_Nuevo/Nuevo.jsx";
+import Loading from "./Paginas/Loading/Loading";
 
 function App() {
   return (

@@ -1,14 +1,18 @@
 import styled from "./SearchBar.modules.css";
+import DispTemps from "../DispTemps/DispTemps";
 
-// dentro de render cards pone un paginado
+// dentro de render cards (CARTAS) pone un paginado
 
 export default function SearchBar() {
   const funcionParaFiltrar = () => {
     console.log("cambiando");
   };
   return (
-    <div className={styled.contenedor}>
+    <div className={styled.searchBar}>
       <button>Reiniciar</button>
+
+      <span>Filtrar Por: </span>
+      <DispTemps />
 
       <span>Mostrar: </span>
       <select onChange={funcionParaFiltrar}>
@@ -18,7 +22,7 @@ export default function SearchBar() {
       </select>
 
       <span>Filtrar Por: </span>
-      <select className="">
+      <select onChange={funcionParaFiltrar}>
         <option value="">NONE</option>
         <option value="">ALFABETICO: A-Z</option>
         <option value="">ALFABETICO: Z-A</option>

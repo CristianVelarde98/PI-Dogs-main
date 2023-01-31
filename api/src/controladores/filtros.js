@@ -4,7 +4,7 @@ const armonizarDatosExt = (datos) => {
     const objPerro = {};
     objPerro["ID"] = dog.id;
     objPerro["Nombre"] = dog.name;
-    // objPerro["TiempoDeVida"] = dog.life_span.slice(0, 2).trim();
+    objPerro["Edad"] = dog.life_span.slice(0, 2).trim();
     dog.image?.url
       ? (objPerro["Imagen"] = dog.image.url)
       : (objPerro["Imagen"] = dog.reference_image_id);
@@ -23,8 +23,8 @@ const armonizarDatosExt = (datos) => {
     const temps = dog.temperament;
     if (temps) {
       const aux = temps.split(", ");
-      objPerro["temperamentos"] = aux;
-    } else objPerro["temperamentos"] = [];
+      objPerro["Temperamentos"] = aux;
+    } else objPerro["Temperamentos"] = [];
     armonizados.push(objPerro);
   }
   return armonizados;
@@ -38,16 +38,19 @@ const armonizarDatosInt = (datos) => {
     const temps = dog["Temperamentos"];
     const temperamentos = [];
     for (const key in dog) {
-      if (key != "Temperamentos") {
+      if (key == "TiempoDeVida") {
+        objPerro.Edad = dog[key];
+      } else if (key != "Temperamentos") {
         objPerro[key] = dog[key]; // copio las propiedades del perrito
       }
     }
     for (const temp of temps) {
       temperamentos.push(temp.dataValues["Nombre"]);
     }
-    objPerro["temperamentos"] = temperamentos;
+    objPerro["Temperamentos"] = temperamentos;
     armonizados.push(objPerro); // por cada vuelta empujo el dato armonizado al array
   }
+
   return armonizados;
 };
 
