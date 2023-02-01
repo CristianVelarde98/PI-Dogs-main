@@ -1,14 +1,23 @@
 // * importacion de los types.js
 
-import {} from "../actions/types.js";
+import { GET_PERROS } from "../actions/types.js";
 
 const initialState = {
-  games: [],
-  topGames: [],
-  detail: {},
-  renderGames: [],
+  todosLosPerros: [],
 };
 
-const rootReducer = (state = initialState, { type, payload }) => {};
+const rootReducer = (state = initialState, { type, payload }) => {
+  switch (type) {
+    case GET_PERROS:
+      return {
+        ...state,
+        todosLosPerros: payload,
+      };
+    default:
+      return {
+        ...state,
+      };
+  }
+};
 
 export default rootReducer;

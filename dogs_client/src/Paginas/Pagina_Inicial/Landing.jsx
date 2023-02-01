@@ -2,6 +2,7 @@ import styled from "./Landing.module.css";
 import imagen from "../../imagenes/perros sonriendo/perros-sonrientes-portada.jpg";
 import { Link } from "react-router-dom";
 import Boton from "../../Componentes/Boton/Boton";
+import { useEffect } from "react";
 
 export default function Landing() {
   return (

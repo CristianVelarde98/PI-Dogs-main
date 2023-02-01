@@ -8,14 +8,14 @@
 .contenedor img {
   height: 400px;
   width: 800px;
-  margin-left: -150px;
+  margin-left: -100px;
   border-radius: 50px;
 }
 
 .parrafo {
   position: absolute;
   top: 15%;
-  left: 48%;
+  left: 50%;
   width: 325px;
 }
 

@@ -1,0 +1,11 @@
+.contenedor2 {
+  margin: 0.5%;
+  background-color: rgb(189, 179, 179);
+  border-radius: 40px;
+  width: 98%;
+  height: 50px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+}

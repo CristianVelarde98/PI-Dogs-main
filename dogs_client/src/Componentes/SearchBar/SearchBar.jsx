@@ -8,10 +8,11 @@ export default function SearchBar() {
     console.log("cambiando");
   };
   return (
-    <div className={styled.searchBar}>
+    <>
       <button>Reiniciar</button>
 
-      <span>Filtrar Por: </span>
+      <span>Filtrar por Temperamento: </span>
+
       <DispTemps />
 
       <span>Mostrar: </span>
@@ -21,7 +22,7 @@ export default function SearchBar() {
         <option value="">EXISTENTES</option>
       </select>
 
-      <span>Filtrar Por: </span>
+      <span>Filtrar por orden: </span>
       <select onChange={funcionParaFiltrar}>
         <option value="">NONE</option>
         <option value="">ALFABETICO: A-Z</option>
@@ -29,6 +30,8 @@ export default function SearchBar() {
         <option value="">PESO: ASENDENTE</option>
         <option value="">PESO: DESENDENTE</option>
       </select>
-    </div>
+
+      <input placeholder="Buscar por Nombre" type="text" />
+    </>
   );
 }

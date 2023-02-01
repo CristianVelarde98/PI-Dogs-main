@@ -157,12 +157,17 @@ img {
 .input {
   line-height: 28px;
   border: 2px solid transparent;
-  border-bottom-color: #777;
   padding: 0.2rem 0;
   outline: none;
   background-color: transparent;
   color: #0d0c22;
   transition: 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.inputBien {
+  border-bottom-color: #777;
+}
+.inputMal {
+  border-bottom-color: red;
 }
 
 .input:focus,

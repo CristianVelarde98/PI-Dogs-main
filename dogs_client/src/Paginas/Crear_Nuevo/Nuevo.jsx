@@ -35,7 +35,6 @@ export default function Nuevo() {
 
     setErrores(validaciones({ ...dogData, [propiedad]: valor }));
   };
-  console.log(errores);
 
   const unaImag = (event) => {
     const regex = /\.(jpg|png)$/i;
@@ -54,9 +53,8 @@ export default function Nuevo() {
 
   const agregarTemp = () => {
     const temp = nuevoTemp;
-    if (temp != "NONE" && temp.length) {
-      if (!mostrarTemps.includes(temp))
-        setMostrarTemps([...mostrarTemps, temp]);
+    if (temp != "NONE" && temp.length && !mostrarTemps.includes(temp)) {
+      setMostrarTemps([...mostrarTemps, temp]);
     }
     setNuevoTemp("");
   };
@@ -72,9 +70,14 @@ export default function Nuevo() {
             onChange={handlerInput}
             value={dogData.Nombre}
             name="Nombre"
-            placeholder="Nombre"
+            placeholder="Nombre "
             type="text"
-            className={`${styled.input} ${styled.nombre}`}
+            autoComplete="off"
+            className={
+              errores.Nombre
+                ? `${styled.input} ${styled.nombre} ${styled.inputBien}`
+                : `${styled.input} ${styled.nombre} ${styled.inputMal}`
+            }
           ></input>
 
           <input
@@ -83,7 +86,12 @@ export default function Nuevo() {
             name="AlturaMaxima"
             placeholder="Altura Maxima"
             type="number"
-            className={`${styled.input} ${styled.alturaMax}`}
+            autoComplete="off"
+            className={
+              errores.AlturaMaxima
+                ? `${styled.input} ${styled.alturaMax} ${styled.inputBien}`
+                : `${styled.input} ${styled.alturaMax} ${styled.inputMal}`
+            }
           ></input>
 
           <input
@@ -92,7 +100,12 @@ export default function Nuevo() {
             name="AlturaMinima"
             placeholder="Altura Minima"
             type="number"
-            className={`${styled.input} ${styled.alturaMin}`}
+            autoComplete="off"
+            className={
+              errores.AlturaMinima
+                ? `${styled.input} ${styled.alturaMin} ${styled.inputBien}`
+                : `${styled.input} ${styled.alturaMin} ${styled.inputMal}`
+            }
           ></input>
 
           <input
@@ -101,7 +114,12 @@ export default function Nuevo() {
             name="PesoMaximo"
             placeholder="Peso Maximo"
             type="number"
-            className={`${styled.input} ${styled.pesoMax}`}
+            autoComplete="off"
+            className={
+              errores.PesoMaximo
+                ? `${styled.input} ${styled.pesoMax} ${styled.inputBien}`
+                : `${styled.input} ${styled.pesoMax} ${styled.inputMal}`
+            }
           ></input>
 
           <input
@@ -110,7 +128,12 @@ export default function Nuevo() {
             name="PesoMinimo"
             placeholder="Peso Minimo"
             type="number"
-            className={`${styled.input} ${styled.pesoMin}`}
+            autoComplete="off"
+            className={
+              errores.PesoMinimo
+                ? `${styled.input} ${styled.pesoMin} ${styled.inputBien}`
+                : `${styled.input} ${styled.pesoMin} ${styled.inputMal}`
+            }
           ></input>
 
           <input
@@ -119,14 +142,19 @@ export default function Nuevo() {
             name="Edad"
             placeholder="Edad"
             type="number"
-            className={`${styled.input} ${styled.años}`}
+            autoComplete="off"
+            className={
+              errores.PesoMinimo
+                ? `${styled.input} ${styled.años} ${styled.inputBien}`
+                : `${styled.input} ${styled.años} ${styled.inputMal}`
+            }
           ></input>
 
           <input
             onChange={(e) => unaImag(e)}
             placeholder="Link de la imagen  (debe terminar en png o jpg)"
             type="text"
-            className={`${styled.input} ${styled.imagen}`}
+            className={`${styled.input} ${styled.imagen} ${styled.inputBien}`}
           ></input>
 
           <div className={styled.contenedor2}>
@@ -143,7 +171,7 @@ export default function Nuevo() {
               value={nuevoTemp}
               type="text"
               placeholder="Añadir Temperamento"
-              className={`${styled.input} ${styled.nuevoTemp}`}
+              className={`${styled.input} ${styled.nuevoTemp} ${styled.inputBien}`}
             />
             <div className={styled.botonTemp}>
               <button onClick={agregarTemp}>Agregar</button>

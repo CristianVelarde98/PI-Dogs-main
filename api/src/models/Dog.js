@@ -8,10 +8,12 @@ module.exports = (sequelize) => {
       ID: {
         type: DataTypes.STRING,
         primaryKey: true,
+        unique: true,
       },
       Nombre: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
       },
       AlturaMaxima: {
         type: DataTypes.INTEGER,
