@@ -31,7 +31,11 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      TiempoDeVida: {
+      ExpectativaDeVidaMinima: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      ExpectativaDeVidaMaxima: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },

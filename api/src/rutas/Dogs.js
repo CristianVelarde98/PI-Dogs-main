@@ -37,7 +37,8 @@ router.post("/", async (req, res) => {
     alturaMin,
     pesoMax,
     pesoMin,
-    años,
+    edadMinima,
+    edadMaxima,
     imagen,
     temperamentos,
   } = req.body;
@@ -48,11 +49,12 @@ router.post("/", async (req, res) => {
       alturaMin,
       pesoMax,
       pesoMin,
-      años,
+      edadMinima,
+      edadMaxima,
       imagen,
       temperamentos
     );
-    res.status(200).json(respuesta);
+    res.status(200).json({ mensaje: respuesta.Nombre + " agregado con exito" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

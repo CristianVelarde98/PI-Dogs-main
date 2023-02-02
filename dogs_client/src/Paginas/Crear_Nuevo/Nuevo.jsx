@@ -1,30 +1,36 @@
 import styled from "./Nuevo.module.css";
 import NavBar from "../../Componentes/NavBar/NavBar";
-import Boton from "../../Componentes/Boton/Boton";
 import imagen from "../../imagenes/dibujos de perros/descarga.png";
 import DispTemps from "../../Componentes/DispTemps/DispTemps";
 import validaciones from "./validaciones.js";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import * as actions from "../../Redux/actions/actions.js";
+import { Link } from "react-router-dom";
 
 export default function Nuevo() {
+  const dispatch = useDispatch();
   const [mostrarTemps, setMostrarTemps] = useState([]);
   const [nuevoTemp, setNuevoTemp] = useState("");
   const [unaImg, setUnaImg] = useState(<img src={imagen} alt="" />);
+  const [linkImg, setLinkImg] = useState(null);
   const [dogData, setDogData] = useState({
     Nombre: "",
-    Edad: "",
     AlturaMaxima: "",
     AlturaMinima: "",
     PesoMaximo: "",
     PesoMinimo: "",
+    EdadMinima: "",
+    EdadMaxima: "",
   });
   const [errores, setErrores] = useState({
-    Nombre: "",
-    Edad: "",
-    AlturaMaxima: "",
-    AlturaMinima: "",
-    PesoMaximo: "",
-    PesoMinimo: "",
+    Nombre: "Nombre invalido",
+    AlturaMaxima: "AlturaMaxima invalida",
+    AlturaMinima: "AlturaMinima invalida",
+    PesoMaximo: "PesoMaximo invalido",
+    PesoMinimo: "PesoMinimo invalido",
+    EdadMinima: "EdadMinima invalida",
+    EdadMaxima: "EdadMaxima invalida",
   });
 
   const handlerInput = (evento) => {
@@ -39,8 +45,13 @@ export default function Nuevo() {
   const unaImag = (event) => {
     const regex = /\.(jpg|png)$/i;
     const algo = event.target.value;
-    if (!algo.length || !regex.test(algo)) setUnaImg(<img src={imagen} />);
-    else setUnaImg(<img src={`${algo}`} alt="No es un link valido" />);
+    if (!algo.length || !regex.test(algo)) {
+      setUnaImg(<img src={imagen} />);
+      setLinkImg(algo);
+    } else {
+      setUnaImg(<img src={`${algo}`} alt="No es un link valido" />);
+      setLinkImg(algo);
+    }
   };
 
   const sacar = (evento, elemento) => {
@@ -59,6 +70,46 @@ export default function Nuevo() {
     setNuevoTemp("");
   };
 
+  const crearRaza = () => {
+    if (Object.entries(errores).length !== 0) {
+      alert("Los datos estan incompletos o mal completados");
+    } else {
+      const perro = {
+        nombre: dogData.Nombre,
+        alturaMax: dogData.AlturaMaxima,
+        alturaMin: dogData.AlturaMinima,
+        pesoMax: dogData.PesoMaximo,
+        pesoMin: dogData.PesoMinimo,
+        edadMinima: dogData.EdadMinima,
+        edadMaxima: dogData.EdadMaxima,
+        imagen: linkImg,
+        temperamentos: mostrarTemps,
+      };
+      setDogData({
+        Nombre: "",
+        AlturaMaxima: "",
+        AlturaMinima: "",
+        PesoMaximo: "",
+        PesoMinimo: "",
+        EdadMinima: "",
+        EdadMaxima: "",
+      });
+      setErrores({
+        Nombre: "Nombre invalido",
+        AlturaMaxima: "AlturaMaxima invalida",
+        AlturaMinima: "AlturaMinima invalida",
+        PesoMaximo: "PesoMaximo invalido",
+        PesoMinimo: "PesoMinimo invalido",
+        EdadMinima: "EdadMinima invalida",
+        EdadMaxima: "EdadMaxima invalida",
+      });
+      setLinkImg("");
+      setUnaImg(<img src={imagen} alt="" />);
+      setMostrarTemps([]);
+      dispatch(actions.postRaza(perro));
+    }
+  };
+
   return (
     <div>
       <NavBar />
@@ -70,11 +121,11 @@ export default function Nuevo() {
             onChange={handlerInput}
             value={dogData.Nombre}
             name="Nombre"
-            placeholder="Nombre "
+            placeholder="Raza (Debe comenzar con mayuscula y contener entre 4 y 30 letras)"
             type="text"
             autoComplete="off"
             className={
-              errores.Nombre
+              !errores.Nombre
                 ? `${styled.input} ${styled.nombre} ${styled.inputBien}`
                 : `${styled.input} ${styled.nombre} ${styled.inputMal}`
             }
@@ -82,15 +133,29 @@ export default function Nuevo() {
 
           <input
             onChange={handlerInput}
-            value={dogData.AlturaMaxima}
-            name="AlturaMaxima"
-            placeholder="Altura Maxima"
+            value={dogData.EdadMinima}
+            name="EdadMinima"
+            placeholder="Edad Minima (1 - 99)"
             type="number"
             autoComplete="off"
             className={
-              errores.AlturaMaxima
-                ? `${styled.input} ${styled.alturaMax} ${styled.inputBien}`
-                : `${styled.input} ${styled.alturaMax} ${styled.inputMal}`
+              !errores.EdadMinima
+                ? `${styled.input} ${styled.años} ${styled.inputBien}`
+                : `${styled.input} ${styled.años} ${styled.inputMal}`
+            }
+          ></input>
+
+          <input
+            onChange={handlerInput}
+            value={dogData.EdadMaxima}
+            name="EdadMaxima"
+            placeholder="Edad Maxima (1 - 99)"
+            type="number"
+            autoComplete="off"
+            className={
+              !errores.EdadMaxima
+                ? `${styled.input} ${styled.años2} ${styled.inputBien}`
+                : `${styled.input} ${styled.años2} ${styled.inputMal}`
             }
           ></input>
 
@@ -98,11 +163,11 @@ export default function Nuevo() {
             onChange={handlerInput}
             value={dogData.AlturaMinima}
             name="AlturaMinima"
-            placeholder="Altura Minima"
+            placeholder="Altura Minima (1 - 99)"
             type="number"
             autoComplete="off"
             className={
-              errores.AlturaMinima
+              !errores.AlturaMinima
                 ? `${styled.input} ${styled.alturaMin} ${styled.inputBien}`
                 : `${styled.input} ${styled.alturaMin} ${styled.inputMal}`
             }
@@ -110,15 +175,15 @@ export default function Nuevo() {
 
           <input
             onChange={handlerInput}
-            value={dogData.PesoMaximo}
-            name="PesoMaximo"
-            placeholder="Peso Maximo"
+            value={dogData.AlturaMaxima}
+            name="AlturaMaxima"
+            placeholder="Altura Maxima (1 - 99)"
             type="number"
             autoComplete="off"
             className={
-              errores.PesoMaximo
-                ? `${styled.input} ${styled.pesoMax} ${styled.inputBien}`
-                : `${styled.input} ${styled.pesoMax} ${styled.inputMal}`
+              !errores.AlturaMaxima
+                ? `${styled.input} ${styled.alturaMax} ${styled.inputBien}`
+                : `${styled.input} ${styled.alturaMax} ${styled.inputMal}`
             }
           ></input>
 
@@ -126,11 +191,11 @@ export default function Nuevo() {
             onChange={handlerInput}
             value={dogData.PesoMinimo}
             name="PesoMinimo"
-            placeholder="Peso Minimo"
+            placeholder="Peso Minimo (1 - 99)"
             type="number"
             autoComplete="off"
             className={
-              errores.PesoMinimo
+              !errores.PesoMinimo
                 ? `${styled.input} ${styled.pesoMin} ${styled.inputBien}`
                 : `${styled.input} ${styled.pesoMin} ${styled.inputMal}`
             }
@@ -138,15 +203,15 @@ export default function Nuevo() {
 
           <input
             onChange={handlerInput}
-            value={dogData.Edad}
-            name="Edad"
-            placeholder="Edad"
+            value={dogData.PesoMaximo}
+            name="PesoMaximo"
+            placeholder="Peso Maximo (1 - 99)"
             type="number"
             autoComplete="off"
             className={
-              errores.PesoMinimo
-                ? `${styled.input} ${styled.años} ${styled.inputBien}`
-                : `${styled.input} ${styled.años} ${styled.inputMal}`
+              !errores.PesoMaximo
+                ? `${styled.input} ${styled.pesoMax} ${styled.inputBien}`
+                : `${styled.input} ${styled.pesoMax} ${styled.inputMal}`
             }
           ></input>
 
@@ -154,6 +219,7 @@ export default function Nuevo() {
             onChange={(e) => unaImag(e)}
             placeholder="Link de la imagen  (debe terminar en png o jpg)"
             type="text"
+            value={linkImg}
             className={`${styled.input} ${styled.imagen} ${styled.inputBien}`}
           ></input>
 
@@ -165,7 +231,6 @@ export default function Nuevo() {
               <DispTemps estado={setMostrarTemps} actual={mostrarTemps} />
             </div>
 
-            <div className={styled.nuevo}>Nuevo: </div>
             <input
               onChange={(e) => otroTemp(e)}
               value={nuevoTemp}
@@ -195,7 +260,9 @@ export default function Nuevo() {
           </div>
 
           <div className={`${styled.boton}`}>
-            <Boton string={"Submit"} />
+            <button className={styled.btn} onClick={crearRaza}>
+              CREAR
+            </button>
           </div>
         </div>
       </div>

@@ -5,3 +5,12 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
+.paginado {
+  background-color: aqua;
+  border-radius: 30px;
+  width: 100%;
+  height: 30px;
+  margin-top: 30px;
+  border: 50px;
+}

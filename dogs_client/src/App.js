@@ -12,16 +12,17 @@ import Nuevo from "./Paginas/Crear_Nuevo/Nuevo.jsx";
 
 function App() {
   return (
-    <div className="App">
-      <div class="bg-container">
-        <div class="transparent"></div>
+    <div class="bg-container">
+      <div class="transparent">
+        <div className="App">
+          <Routes>
+            <Route exact path="/" element={<Landing />} />
+            <Route exact path="/Home" element={<Home />} />
+            <Route exact path="/Detalle/:id" element={<Detalle />} />
+            <Route exact path="/Formulario" element={<Nuevo />} />
+          </Routes>
+        </div>
       </div>
-      <Routes>
-        <Route exact path="/" element={<Landing />} />
-        <Route exact path="/Home" element={<Home />} />
-        <Route exact path="/Detalle/:id" element={<Detalle />} />
-        <Route exact path="/Formulario" element={<Nuevo />} />
-      </Routes>
     </div>
   );
 }

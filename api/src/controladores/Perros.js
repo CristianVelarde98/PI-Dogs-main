@@ -13,14 +13,16 @@ const CrearPerro = async (
   alturaMin,
   pesoMax,
   pesoMin,
-  años,
+  edadMinima,
+  edadMaxima,
   imagen,
   temperamentos
 ) => {
   const result = await Dog.create({
     ID: "L" + id,
     Nombre: nombre,
-    TiempoDeVida: años,
+    ExpectativaDeVidaMinima: edadMinima,
+    ExpectativaDeVidaMaxima: edadMaxima,
     Imagen: imagen,
     AlturaMaxima: alturaMax,
     AlturaMinima: alturaMin,

@@ -1,7 +1,3 @@
-.contenedorImg img {
-  width: 200px;
-  height: 200px;
-}
 /* .contenedor {
   display: flex;
   justify-items: flex-start;
@@ -22,16 +18,53 @@
   transition: 0.5s ease-out;
   overflow: visible;
   display: grid;
+  grid-template-columns: repeat(10, 10%);
+  grid-template-rows: repeat(10, 10%);
 }
 
-.carddetails {
-  color: black;
-  height: 100%;
-  gap: 0.5em;
-  display: grid;
-  place-content: center;
+.contenedorName {
+  grid-column: 6/10;
+  grid-row: 1/4;
 }
 
+.contenedorPeso {
+  grid-column: 6/10;
+  grid-row: 4/7;
+}
+
+.contenedorImg img {
+  width: 180px;
+  height: 180px;
+  grid-column: 1/6;
+  grid-row: 1/7;
+  padding: 2px;
+}
+
+.contenedor3 {
+  grid-row: 8/12;
+  grid-column: 1/11;
+  background-color: rgb(189, 179, 179);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: stretch;
+}
+
+.contTemp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(215, 226, 226);
+  border-radius: 10px;
+  border: solid black 1px;
+  margin-top: 5px;
+  margin-left: 5px;
+  padding: 4px;
+}
+
+/************************aspectos generales*******************************/
 .cardbutton {
   transform: translate(-50%, 125%);
   width: 60%;

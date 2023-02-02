@@ -13,7 +13,7 @@ export default function NavBar() {
         <Boton string={"INICIO"} className={styled.inicio} />
       </Link>
       <Link to={"/Formulario"}>
-        <Boton string={"AGREGAR PERRITO"} className={styled.agregar} />
+        <Boton string={"CREAR RAZA"} className={styled.agregar} />
       </Link>
     </div>
   );
