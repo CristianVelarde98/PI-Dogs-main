@@ -34,10 +34,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case GET_DETALLE:
       return { ...state, detalle: payload };
     case BUSCAR_NAME:
-      const perro = state.todosLosPerros.find(
-        (elemento) => elemento.Nombre === payload
+      const resultados = state.todosLosPerros.filter((elemento) =>
+        elemento.Nombre.includes(payload)
       );
-      if (perro) return { ...state, filtrado: [perro] };
+      if (resultados.length) return { ...state, filtrado: resultados };
       alert("La raza buscada no existe o el nombre que ingreso es inexacto");
       return { ...state };
     case FILTRO_RESET:
