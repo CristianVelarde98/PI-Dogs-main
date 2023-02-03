@@ -18,18 +18,22 @@ export default function Carta({ perro }) {
       <div className={styled.contenedorName}>{Nombre}</div>
 
       <div className={styled.contenedorPeso}>
+        <div>Peso min-max </div>
+
         <div>{PesoMinimo}</div>
+        <div>-</div>
         <div>{PesoMaximo}</div>
       </div>
 
       <div className={styled.contenedor3}>
+        <h4>Temperamentos</h4>
         {Temperamentos.map((element) => {
           return <div className={styled.contTemp}>{element}</div>;
         })}
       </div>
 
       <Link to={`/Detalle/${ID}`}>
-        <button className={styled.cardbutton}>Ver Perrito</button>
+        <button className={styled.cardbutton}>Ver Raza</button>
       </Link>
     </div>
   );

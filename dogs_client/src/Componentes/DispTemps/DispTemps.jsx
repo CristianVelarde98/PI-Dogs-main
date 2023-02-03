@@ -15,7 +15,7 @@ export default function DispTemps(props) {
 
   const valorSelector = (event) => {
     const temp = event.target.value;
-    if (temp != "NONE") {
+    if (temp != "NONE" && actual) {
       if (!actual.includes(temp)) estado([...actual, temp]);
     }
   };

@@ -23,9 +23,17 @@ export default function Cartas(props) {
   return (
     <div>
       <div className={styled.paginado}>
+        <h5>Paginas</h5>
         <ul>
           {paginas.map((pagina) => {
-            return <button onClick={() => paginado(pagina)}>{pagina}</button>;
+            return (
+              <button
+                className={styled.btnPaginas}
+                onClick={() => paginado(pagina)}
+              >
+                {pagina}
+              </button>
+            );
           })}
         </ul>
       </div>
@@ -37,9 +45,17 @@ export default function Cartas(props) {
       </div>
 
       <div className={styled.paginado}>
+        <h5>Paginas</h5>
         <ul>
           {paginas.map((pagina) => {
-            return <button onClick={() => paginado(pagina)}>{pagina}</button>;
+            return (
+              <button
+                className={styled.btnPaginas}
+                onClick={() => paginado(pagina)}
+              >
+                {pagina}
+              </button>
+            );
           })}
         </ul>
       </div>

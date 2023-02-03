@@ -13,6 +13,7 @@ export default function Home() {
   const cartas = useSelector((state) => {
     return state.todosLosPerros;
   });
+  const cartasFiltradas = useSelector((state) => state.filtrado);
   const [futuraInfo, setFuturaInfo] = useState(true);
 
   useEffect(() => {
@@ -33,7 +34,7 @@ export default function Home() {
       <div className={styled.contenedor2}>
         <SearchBar />
       </div>
-      <Cartas elementos={cartas} />
+      <Cartas elementos={cartasFiltradas} />
     </div>
   );
 }

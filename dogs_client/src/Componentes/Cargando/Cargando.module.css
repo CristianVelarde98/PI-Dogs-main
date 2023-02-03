@@ -13,7 +13,7 @@
 .loader::before {
   animation: loader 2s linear infinite;
   content: "";
-  border: 10px solid black;
+  border: 10px solid rgb(255, 255, 255);
   width: 500px;
   height: 500px;
   position: absolute;

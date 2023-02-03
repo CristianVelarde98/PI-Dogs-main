@@ -8,12 +8,13 @@
 
 .card {
   margin: 10px;
-  width: 400px;
-  height: 300px;
+  margin-bottom: 50px;
+  width: 300px;
+  height: 480px;
   border-radius: 20px;
   background: #f5f5f5;
   position: relative;
-  padding: 1.8rem;
+  padding: 1rem;
   border: 2px solid #c3c6ce;
   transition: 0.5s ease-out;
   overflow: visible;
@@ -23,25 +24,49 @@
 }
 
 .contenedorName {
-  grid-column: 6/10;
-  grid-row: 1/4;
+  grid-column: 1/11;
+  grid-row: 5/6;
+  height: 20px;
+  background-color: rgb(215, 226, 226);
+  border-radius: 10px;
+  border: solid black 1px;
+  margin-top: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .contenedorPeso {
-  grid-column: 6/10;
-  grid-row: 4/7;
+  grid-column: 3/9;
+  grid-row: 6/7;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 20px;
+  background-color: rgb(215, 226, 226);
+  border-radius: 10px;
+  border: solid black 1px;
+  margin-top: 10px;
+  padding: 3px;
+}
+
+.contenedorImg {
+  grid-column: 2/ 8;
+  grid-row: 1/6;
 }
 
 .contenedorImg img {
-  width: 180px;
-  height: 180px;
-  grid-column: 1/6;
-  grid-row: 1/7;
-  padding: 2px;
+  width: 240px;
+  height: 200px;
 }
 
 .contenedor3 {
-  grid-row: 8/12;
+  grid-row: 7/11;
   grid-column: 1/11;
   background-color: rgb(189, 179, 179);
   border-radius: 10px;
@@ -51,6 +76,9 @@
   align-content: flex-start;
   align-items: stretch;
 }
+.contenedor3 h4 {
+  width: 100%;
+}
 
 .contTemp {
   display: flex;
@@ -59,9 +87,10 @@
   background-color: rgb(215, 226, 226);
   border-radius: 10px;
   border: solid black 1px;
-  margin-top: 5px;
-  margin-left: 5px;
-  padding: 4px;
+  margin-top: 2px;
+  margin-left: 2px;
+  padding: 3px;
+  padding-left: 5px;
 }
 
 /************************aspectos generales*******************************/
