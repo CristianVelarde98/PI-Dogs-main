@@ -14,9 +14,9 @@ const armonizarDatosExt = (datos) => {
       objPerro["ExpectativaDeVidaMinima"] = dog.life_span.slice(0, 2).trim();
       objPerro["ExpectativaDeVidaMaxima"] = dog.life_span.slice(4, 6).trim();
     }
-    dog.image?.url
-      ? (objPerro["Imagen"] = dog.image.url)
-      : (objPerro["Imagen"] = dog.reference_image_id);
+    objPerro[
+      "Imagen"
+    ] = `https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`;
     const altura = dog.height.metric;
     if (altura.length > 2) {
       const aux = altura.split(" - ");

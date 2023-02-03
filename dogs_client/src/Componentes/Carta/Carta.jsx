@@ -1,24 +1,27 @@
 import styled from "./Carta.module.css";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import ImgPorDefault from "../../imagenes/dibujos de perros/descarga.png";
 
 export default function Carta({ perro }) {
   const { ID, Nombre, PesoMaximo, PesoMinimo, Imagen, Temperamentos } = perro;
 
+  const [imageSrc, setImageSrc] = useState(Imagen);
+
   return (
     <div className={`${styled.card} ${styled.contenedor}`}>
       <div className={styled.contenedorImg}>
-        {Imagen ? (
-          <img src={Imagen} alt="Link no valido" />
-        ) : (
-          <img src={ImgPorDefault} />
-        )}
+        <img
+          src={imageSrc}
+          alt="Link no valido"
+          onError={() => setImageSrc(ImgPorDefault)}
+        />
       </div>
 
       <div className={styled.contenedorName}>{Nombre}</div>
 
       <div className={styled.contenedorPeso}>
-        <div>Peso min-max </div>
+        <div>Peso min-max (kg) </div>
 
         <div>{PesoMinimo}</div>
         <div>-</div>

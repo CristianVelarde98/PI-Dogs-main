@@ -21,36 +21,37 @@ export default function validaciones({
     errores.Nombre = "Nombre invalido";
   }
 
-  if (!EdadMaxima.length) {
-    if (EdadMaxima < EdadMinima) errores.EdadMaxima = "EdadMaxima invalida";
-    if (!EdadMaxima.length) errores.EdadMaxima = "EdadMaxima invalida";
+  const auxEdadMax = parseInt(EdadMaxima);
+  const auxEdadMin = parseInt(EdadMinima);
+
+  if (!EdadMinima.length || !EdadMaxima.length) {
+    errores.EdadMaxima = "EdadMaxima invalida";
+    errores.EdadMinima = "EdadMinima invalida";
+  } else if (auxEdadMax < auxEdadMin) {
+    errores.EdadMaxima = "EdadMaxima invalida";
+    errores.EdadMinima = "EdadMinima invalida";
   }
 
-  if (!EdadMinima.length) {
-    if (EdadMinima > EdadMaxima) errores.EdadMinima = "EdadMinimainvalida";
-    if (!EdadMinima.length) errores.EdadMinima = "EdadMinimainvalida";
+  const auxPesoMax = parseInt(PesoMaximo);
+  const auxPesoMin = parseInt(PesoMinimo);
+
+  if (!PesoMaximo.length || !PesoMinimo.length) {
+    errores.PesoMaximo = "PesoMaximo invalida";
+    errores.PesoMinimo = "PesoMinimo invalida";
+  } else if (auxPesoMax < auxPesoMin) {
+    errores.PesoMaximo = "PesoMaximo invalida";
+    errores.PesoMinimo = "PesoMinimo invalida";
   }
 
-  if (!PesoMaximo.length) {
-    if (PesoMaximo < PesoMinimo) errores.PesoMaximo = "PesoMaximo invalida";
-    if (!PesoMaximo.length) errores.PesoMaximo = "PesoMaximo invalida";
-  }
+  const auxAltMax = parseInt(AlturaMaxima);
+  const auxAltMin = parseInt(AlturaMinima);
 
-  if (!PesoMinimo.length) {
-    if (PesoMinimo > PesoMaximo) errores.PesoMinimo = "PesoMinimo invalida";
-    if (!PesoMinimo.length) errores.PesoMinimo = "PesoMinimo invalida";
-  }
-
-  if (!AlturaMaxima.length) {
-    if (AlturaMaxima < AlturaMinima)
-      errores.AlturaMaxima = "AlturaMaxima invalida";
-    if (!AlturaMaxima.length) errores.AlturaMaxima = "AlturaMaxima invalida";
-  }
-
-  if (!AlturaMinima.length) {
-    if (AlturaMinima > AlturaMaxima)
-      errores.AlturaMinima = "AlturaMinima invalida";
-    if (!AlturaMinima.length) errores.AlturaMinima = "AlturaMinima invalida";
+  if (!AlturaMaxima.length || !AlturaMinima.length) {
+    errores.AlturaMaxima = "AlturaMaxima invalida";
+    errores.AlturaMinima = "AlturaMinima invalida";
+  } else if (auxAltMax < auxAltMin) {
+    errores.AlturaMaxima = "AlturaMaxima invalida";
+    errores.AlturaMinima = "AlturaMinima invalida";
   }
 
   return errores;

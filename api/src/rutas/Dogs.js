@@ -26,7 +26,7 @@ router.get("/:idRaza", async (req, res) => {
     const perro = await findDog(idRaza);
     res.status(200).json(perro);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).send(error.message);
   }
 });
 

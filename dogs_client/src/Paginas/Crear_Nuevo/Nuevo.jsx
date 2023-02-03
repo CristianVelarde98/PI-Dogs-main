@@ -6,7 +6,6 @@ import validaciones from "./validaciones.js";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as actions from "../../Redux/actions/actions.js";
-import { Link } from "react-router-dom";
 
 export default function Nuevo() {
   const dispatch = useDispatch();
@@ -117,11 +116,13 @@ export default function Nuevo() {
         <div className={styled.formulario}>
           <div className={styled.imgPorDef}>{unaImg}</div>
 
+          <div className={styled.nombre3}>Nombre de Raza:</div>
+
           <input
             onChange={handlerInput}
             value={dogData.Nombre}
             name="Nombre"
-            placeholder="Raza (Debe comenzar con mayuscula y contener entre 4 y 30 letras)"
+            placeholder="(Debe comenzar con mayuscula)"
             type="text"
             autoComplete="off"
             className={
@@ -131,11 +132,13 @@ export default function Nuevo() {
             }
           ></input>
 
+          <div className={styled.años3}>Expectativa de vida min-max(años):</div>
+
           <input
             onChange={handlerInput}
             value={dogData.EdadMinima}
             name="EdadMinima"
-            placeholder="Edad Minima (1 - 99)"
+            placeholder="Min"
             type="number"
             autoComplete="off"
             className={
@@ -149,7 +152,7 @@ export default function Nuevo() {
             onChange={handlerInput}
             value={dogData.EdadMaxima}
             name="EdadMaxima"
-            placeholder="Edad Maxima (1 - 99)"
+            placeholder="Max"
             type="number"
             autoComplete="off"
             className={
@@ -159,11 +162,15 @@ export default function Nuevo() {
             }
           ></input>
 
+          <div className={styled.altura3}>
+            Altura media de raza min-max(cm):
+          </div>
+
           <input
             onChange={handlerInput}
             value={dogData.AlturaMinima}
             name="AlturaMinima"
-            placeholder="Altura Minima (1 - 99)"
+            placeholder="Min"
             type="number"
             autoComplete="off"
             className={
@@ -177,7 +184,7 @@ export default function Nuevo() {
             onChange={handlerInput}
             value={dogData.AlturaMaxima}
             name="AlturaMaxima"
-            placeholder="Altura Maxima (1 - 99)"
+            placeholder="Max "
             type="number"
             autoComplete="off"
             className={
@@ -187,11 +194,13 @@ export default function Nuevo() {
             }
           ></input>
 
+          <div className={styled.peso3}>Peso medio de raza min-max(kg): </div>
+
           <input
             onChange={handlerInput}
             value={dogData.PesoMinimo}
             name="PesoMinimo"
-            placeholder="Peso Minimo (1 - 99)"
+            placeholder="Min"
             type="number"
             autoComplete="off"
             className={
@@ -205,7 +214,7 @@ export default function Nuevo() {
             onChange={handlerInput}
             value={dogData.PesoMaximo}
             name="PesoMaximo"
-            placeholder="Peso Maximo (1 - 99)"
+            placeholder="Max"
             type="number"
             autoComplete="off"
             className={

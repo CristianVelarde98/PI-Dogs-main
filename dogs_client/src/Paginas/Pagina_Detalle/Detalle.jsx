@@ -6,37 +6,79 @@ import { useEffect } from "react";
 import { useState } from "react";
 import * as actions from "../../Redux/actions/actions.js";
 import Loading from "../Loading/Loading.jsx";
+import ImgPorDefault from "../../imagenes/dibujos de perros/descarga.png";
 
 export default function Detalle() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const [info, setInfo] = useState(false);
   const perro = useSelector((state) => {
     return state.detalle;
   });
-
-  let nombre;
-  let altura;
-  let peso;
-  let expectativa;
-  let imagen;
-  let temperamentos;
+  const [info, setInfo] = useState(false);
+  const [imageSrc, setImageSrc] = useState(ImgPorDefault);
 
   useEffect(() => {
-    if (!perro.length) {
+    if (!perro.length || perro[0].ID !== id) {
       dispatch(actions.getDetalle(id));
-    } else setInfo(perro[0]);
-  }, [perro]);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (perro.length && perro[0].ID == id) {
+      setInfo(true);
+      setImageSrc(perro[0].Imagen);
+    }
+  }, [perro, id]);
 
   if (!info) return <Loading />;
-  if (!!info) {
-    console.log("hay info");
-  }
+
+  const Nombre = perro[0].Nombre;
+  const altura = `${perro[0].AlturaMinima} - ${perro[0].AlturaMaxima}`;
+  const peso = `${perro[0].PesoMinimo} - ${perro[0].PesoMaximo}`;
+  const expectativa = `${perro[0].ExpectativaDeVidaMinima} - ${perro[0].ExpectativaDeVidaMaxima}`;
+  const temperamentos = perro[0].Temperamentos;
 
   return (
-    <div className={styled.contenedor}>
+    <>
       <NavBar />
-      <h1>{`Estoy en la pagina Detalle con el id: ${id}`}</h1>
-    </div>
+      <div className={styled.contenedor}>
+        <div className={`${styled.card} `}>
+          <div className={styled.contenedorImg}>
+            <img
+              src={imageSrc}
+              alt="Link no valido"
+              onError={() => setImageSrc(ImgPorDefault)}
+            />
+          </div>
+
+          <div className={styled.contenedorName}>
+            <div>Raza: </div>
+            <div>{Nombre}</div>
+          </div>
+
+          <div className={styled.contenedorPeso}>
+            <div>Peso min-max (kg): </div>
+            <div>{peso}</div>
+          </div>
+
+          <div className={styled.contenedorAltura}>
+            <div>Altura min-max (cm): </div>
+            <div>{altura}</div>
+          </div>
+
+          <div className={styled.contenedorAños}>
+            <div>Expectativa de vida (años):</div>
+            <div>{expectativa}</div>
+          </div>
+
+          <div className={styled.contenedor3}>
+            <h4>Temperamentos</h4>
+            {temperamentos.map((element) => {
+              return <div className={styled.contTemp}>{element}</div>;
+            })}
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
